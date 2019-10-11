@@ -24,6 +24,7 @@ jobs:
     inputs:
       versionSpec: '8'
       jdkArchitectureOption: x64
+      jdkSourceOption: AzureStorage
     displayName: '[Config] Use - Java 8'
   - script: ./mvnw clean verify
     displayName: Build
