@@ -1,0 +1,22 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cc.arduino.create</groupId>
+    <artifactId>cc.arduino.create.root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>cc.arduino.create</groupId>
+        <artifactId>cc.arduino.create.configuration</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>./releng/cc.arduino.create.configuration</relativePath>
+    </parent>
+
+    <modules>
+        <module>bundles</module>
+        <module>features</module>
+        <module>tests</module>
+        <module>releng</module>
+    </modules>
+
+</project>

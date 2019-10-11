@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Core Tests
+Bundle-SymbolicName: cc.arduino.create.core.tests
+Bundle-Version: 0.0.1.qualifier
+Fragment-Host: cc.arduino.create.core;bundle-version="0.0.1"
+Automatic-Module-Name: cc.arduino.create.core.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.junit;bundle-version="4.12.0",
+ org.hamcrest.core;bundle-version="1.3.0"

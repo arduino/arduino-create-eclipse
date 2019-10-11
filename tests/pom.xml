@@ -1,0 +1,19 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cc.arduino.create</groupId>
+    <artifactId>cc.arduino.create.tests</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <parent>
+        <groupId>cc.arduino.create</groupId>
+        <artifactId>cc.arduino.create.root</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <modules>
+        <module>cc.arduino.create.core.tests</module>
+    </modules>
+
+</project>
