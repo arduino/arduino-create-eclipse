@@ -20,5 +20,5 @@ jobs:
   pool:
     vmImage: $(imageName)
   steps:
-  - script: ./mvnw clean verify
+  - script: ./mvnw clean verify -X
     displayName: Build
