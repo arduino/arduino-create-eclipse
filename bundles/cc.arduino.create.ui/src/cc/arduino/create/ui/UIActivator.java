@@ -3,22 +3,11 @@ package cc.arduino.create.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-/**
- * The activator class controls the plug-in life cycle
- */
-public class Activator extends AbstractUIPlugin {
+public class UIActivator extends AbstractUIPlugin {
 
-    // The plug-in ID
     public static final String PLUGIN_ID = "cc.arduino.create.ui"; //$NON-NLS-1$
 
-    // The shared instance
-    private static Activator plugin;
-
-    /**
-     * The constructor
-     */
-    public Activator() {
-    }
+    private static UIActivator plugin;
 
     @Override
     public void start(BundleContext context) throws Exception {
@@ -32,12 +21,7 @@ public class Activator extends AbstractUIPlugin {
         super.stop(context);
     }
 
-    /**
-     * Returns the shared instance
-     *
-     * @return the shared instance
-     */
-    public static Activator getDefault() {
+    public static UIActivator getDefault() {
         return plugin;
     }
 

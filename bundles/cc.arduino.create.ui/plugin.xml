@@ -8,7 +8,7 @@
             class="cc.arduino.create.ui.importer.wizard.ImportWizard"
             icon="icons/arduino.png"
             id="cc.arduino.create.importer.wizard.ImportWizard"
-            name="C/C++ Project from Arduino Create">
+            name="C++ Project from Arduino Create">
          <description>
             Imports an existing project exported by Arduino Create.
          </description>

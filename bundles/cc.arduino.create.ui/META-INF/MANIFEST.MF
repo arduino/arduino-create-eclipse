@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Arduino Create UI
 Bundle-SymbolicName: cc.arduino.create.ui;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Activator: cc.arduino.create.ui.Activator
+Bundle-Activator: cc.arduino.create.ui.UIActivator
 Bundle-Vendor: Arduino
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime

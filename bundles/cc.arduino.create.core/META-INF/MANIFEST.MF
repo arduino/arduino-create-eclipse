@@ -6,4 +6,6 @@ Bundle-Version: 0.0.1.qualifier
 Bundle-Vendor: Arduino
 Automatic-Module-Name: cc.arduino.create.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: com.google.guava;visibility:=reexport
+Require-Bundle: com.google.guava;visibility:=reexport,
+ org.eclipse.core.runtime
+Bundle-Activator: cc.arduino.create.core.CoreActivator
