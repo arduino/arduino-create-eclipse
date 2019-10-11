@@ -13,12 +13,14 @@ jobs:
     matrix:
       linux:
         imageName: 'ubuntu-16.04'
-      # mac:
-      #   imageName: 'macos-10.13'
-      # windows:
-      #   imageName: 'vs2017-win2016'
+      mac:
+        imageName: 'macos-10.13'
+      windows:
+        imageName: 'vs2017-win2016'
   pool:
     vmImage: $(imageName)
+  workspace:
+    clean: all
   steps:
-  - script: ./mvnw clean verify -X
+  - bash: ./mvnw clean verify -X
     displayName: Build
