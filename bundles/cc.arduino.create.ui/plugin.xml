@@ -3,13 +3,10 @@
 <plugin>
    <extension
          point="org.eclipse.ui.importWizards">
-      <category
-            id="cc.arduino.create.ui.importer.category"
-            name="Arduino Create">
-      </category>
       <wizard
             category="org.eclipse.cdt.ui.importWizardCategory"
             class="cc.arduino.create.ui.importer.wizard.ImportWizard"
+            icon="icons/arduino.png"
             id="cc.arduino.create.importer.wizard.ImportWizard"
             name="C/C++ Project from Arduino Create">
          <description>
