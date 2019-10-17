@@ -14,53 +14,65 @@ import static org.eclipse.core.runtime.IStatus.OK;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Collection;
 
-import org.eclipse.core.runtime.AssertionFailedException;
-import org.eclipse.core.runtime.IStatus;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
+import cc.arduino.create.core.ZipUtils;
+
+@RunWith(Parameterized.class)
 public class ProjectStructureValidatorTest {
 
     private final ProjectStructureValidator validator = new ProjectStructureValidator();
 
-    @Test(expected = AssertionFailedException.class)
-    public void check_null() {
-        validator.validate(null, null);
+    @Parameters(name = "{index}: validate({0})={1}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                { null, ERROR },
+                { path("empty"), ERROR },
+                { path("noCoreFolder"), ERROR },
+                { path("noSketchFolder"), ERROR },
+                { path("noSketchFile"), ERROR },
+                { path("noCMakeLists"), ERROR },
+                { path("valid"), OK },
+                { zip("empty"), ERROR },
+                { zip("noCoreFolder"), ERROR },
+                { zip("noSketchFolder"), ERROR },
+                { zip("noSketchFile"), ERROR },
+                { zip("noCMakeLists"), ERROR },
+                { zip("valid"), OK }, });
     }
+
+    @Parameter(0)
+    public Path path;
+
+    @Parameter(1)
+    public int expected;
 
     @Test
-    public void check_empty() {
-        IStatus status = validator.validate(path("empty"), null);
-        assertEquals(ERROR, status.getSeverity());
+    public void check() {
+        assertEquals(expected, validator.validate(path, null).getSeverity());
     }
 
-    @Test
-    public void check_noSketchFolder() {
-        IStatus status = validator.validate(path("noSketchFolder"), null);
-        assertEquals(ERROR, status.getSeverity());
-    }
-
-    @Test
-    public void check_noSketchFile() {
-        IStatus status = validator.validate(path("noSketchFile"), null);
-        assertEquals(ERROR, status.getSeverity());
-    }
-
-    @Test
-    public void check_noCMakeLists() {
-        IStatus status = validator.validate(path("noCMakeLists"), null);
-        assertEquals(ERROR, status.getSeverity());
-    }
-
-    @Test
-    public void check_valid() {
-        IStatus status = validator.validate(path("valid"), null);
-        assertEquals(OK, status.getSeverity());
-    }
-
-    private Path path(String other) {
+    private static Path path(String other) {
         return new File("").getAbsoluteFile().toPath().resolve("resources").resolve(other);
+    }
+
+    private static Path zip(String other) {
+        try {
+            Path target = Files.createTempFile(other, ".zip");
+            Path source = path(other);
+            return ZipUtils.zip(source, target);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

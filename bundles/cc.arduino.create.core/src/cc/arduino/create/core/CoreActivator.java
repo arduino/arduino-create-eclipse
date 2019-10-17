@@ -1,6 +1,10 @@
 package cc.arduino.create.core;
 
+import static org.eclipse.core.runtime.IStatus.ERROR;
+
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
 
 public class CoreActivator extends Plugin {
@@ -23,6 +27,14 @@ public class CoreActivator extends Plugin {
 
     public static CoreActivator getDefault() {
         return plugin;
+    }
+
+    public static IStatus error(String message) {
+        return new Status(ERROR, PLUGIN_ID, message);
+    }
+
+    public static IStatus error(Throwable t) {
+        return new Status(ERROR, PLUGIN_ID, t.getMessage(), t);
     }
 
 }
