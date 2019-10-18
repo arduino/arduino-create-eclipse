@@ -9,3 +9,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: com.google.guava;visibility:=reexport,
  org.eclipse.core.runtime
 Bundle-Activator: cc.arduino.create.core.CoreActivator
+Import-Package: org.slf4j
+Export-Package: cc.arduino.create.core,
+ cc.arduino.create.core.importer.validator,
+ cc.arduino.create.core.utils

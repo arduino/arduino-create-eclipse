@@ -10,18 +10,20 @@
 package cc.arduino.create.core.importer.validator;
 
 import static cc.arduino.create.core.CoreActivator.error;
-import static cc.arduino.create.core.ZipUtils.isZip;
-import static cc.arduino.create.core.ZipUtils.unzip;
+import static cc.arduino.create.core.utils.ZipUtils.isZip;
+import static cc.arduino.create.core.utils.ZipUtils.unzip;
+import static java.nio.file.FileVisitResult.SKIP_SUBTREE;
+import static java.nio.file.Files.createTempDirectory;
 import static java.nio.file.Files.exists;
 import static java.nio.file.Files.isDirectory;
 import static java.nio.file.Files.isReadable;
 import static java.nio.file.Files.isRegularFile;
 import static java.nio.file.Files.list;
+import static java.nio.file.Files.walkFileTree;
 import static org.eclipse.core.runtime.Status.OK_STATUS;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -31,19 +33,22 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SubMonitor;
 
-import cc.arduino.create.core.ZipUtils;
-
 public class ProjectStructureValidator {
 
     public IStatus validate(Path path, IProgressMonitor monitor) {
         if (path == null) {
-            return error(new AssertionFailedException("'path' must not be null."));
+            return error(new AssertionFailedException("Path must be specified."));
         }
-        System.out.println(path + ": " + ZipUtils.isZip(path));
+        if (!exists(path)) {
+            return error(new AssertionFailedException("'" + path + "' does exist."));
+        }
+        if (!isReadable(path)) {
+            return error(new AssertionFailedException("'" + path + "' is not accessible."));
+        }
 
         SubMonitor subMonitor = SubMonitor.convert(monitor, 3);
         try {
-            Files.walkFileTree(path, new ValidatorVisitor(path, subMonitor));
+            walkFileTree(path, new ValidatorVisitor(path, subMonitor));
         } catch (IOException e) {
             return error(e);
         } finally {
@@ -60,7 +65,7 @@ public class ProjectStructureValidator {
         private final Path root;
 
         private ValidatorVisitor(Path root, SubMonitor monitor) throws IOException {
-            this.root = isZip(root) ? unzip(root, Files.createTempDirectory(null)) : root;
+            this.root = isZip(root) ? unzip(root, createTempDirectory(null)) : root;
             this.monitor = monitor;
         }
 
@@ -92,7 +97,7 @@ public class ProjectStructureValidator {
             }
             monitor.worked(1);
 
-            return FileVisitResult.SKIP_SUBTREE;
+            return SKIP_SUBTREE;
         }
 
         private boolean isReadableFile(Path path) {

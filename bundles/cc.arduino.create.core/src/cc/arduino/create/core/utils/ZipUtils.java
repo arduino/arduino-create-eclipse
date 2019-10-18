@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0
  */
-package cc.arduino.create.core;
+package cc.arduino.create.core.utils;
 
 import static java.nio.file.Files.copy;
 import static java.nio.file.Files.createDirectories;

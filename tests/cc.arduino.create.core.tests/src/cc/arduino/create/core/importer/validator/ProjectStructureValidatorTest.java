@@ -25,7 +25,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import cc.arduino.create.core.ZipUtils;
+import cc.arduino.create.core.utils.ZipUtils;
 
 @RunWith(Parameterized.class)
 public class ProjectStructureValidatorTest {
@@ -36,6 +36,8 @@ public class ProjectStructureValidatorTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
                 { null, ERROR },
+                { path("missing"), ERROR },
+                { path("noReadAccess"), ERROR }, // `sudo chmod -R 333 ./noReadAccess/`
                 { path("empty"), ERROR },
                 { path("noCoreFolder"), ERROR },
                 { path("noSketchFolder"), ERROR },
@@ -47,7 +49,7 @@ public class ProjectStructureValidatorTest {
                 { zip("noSketchFolder"), ERROR },
                 { zip("noSketchFile"), ERROR },
                 { zip("noCMakeLists"), ERROR },
-                { zip("valid"), OK }, });
+                { zip("valid"), OK } });
     }
 
     @Parameter(0)
@@ -57,7 +59,7 @@ public class ProjectStructureValidatorTest {
     public int expected;
 
     @Test
-    public void check() {
+    public void test() {
         assertEquals(expected, validator.validate(path, null).getSeverity());
     }
 
