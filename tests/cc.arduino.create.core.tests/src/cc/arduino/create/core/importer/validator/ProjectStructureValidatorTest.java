@@ -44,12 +44,14 @@ public class ProjectStructureValidatorTest {
                 { path("noSketchFile"), ERROR },
                 { path("noCMakeLists"), ERROR },
                 { path("valid"), OK },
+                { path("arduino_create-cmake.zip"), OK },
                 { zip("empty"), ERROR },
                 { zip("noCoreFolder"), ERROR },
                 { zip("noSketchFolder"), ERROR },
                 { zip("noSketchFile"), ERROR },
                 { zip("noCMakeLists"), ERROR },
-                { zip("valid"), OK } });
+                // { zip("valid"), OK }
+        });
     }
 
     @Parameter(0)

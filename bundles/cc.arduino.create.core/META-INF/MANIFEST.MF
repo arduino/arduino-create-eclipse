@@ -7,9 +7,11 @@ Bundle-Vendor: Arduino
 Automatic-Module-Name: cc.arduino.create.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: com.google.guava;visibility:=reexport,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.cdt.managedbuilder.core;visibility:=reexport
 Bundle-Activator: cc.arduino.create.core.CoreActivator
 Import-Package: org.slf4j
 Export-Package: cc.arduino.create.core,
  cc.arduino.create.core.importer.validator,
+ cc.arduino.create.core.managedbuilders,
  cc.arduino.create.core.utils

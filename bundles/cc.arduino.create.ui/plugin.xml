@@ -10,7 +10,7 @@
             id="cc.arduino.create.importer.wizard.ImportWizard"
             name="C++ Project from Arduino Create">
          <description>
-            Imports an existing project exported by Arduino Create.
+            Imports an existing project exported by Arduino Create
          </description>
       </wizard>
    </extension>
