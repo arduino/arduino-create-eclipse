@@ -45,7 +45,9 @@ public enum ImageDescriptorCache {
      */
     public static enum ImageRef {
 
-        ARDUINO("arduino.png");
+        ARDUINO("arduino.png"),
+
+        IMPORT_WIZARD_BANNER("import_wiz.png");
 
         private static final Logger LOGGER = LoggerFactory.getLogger(ImageRef.class);
 

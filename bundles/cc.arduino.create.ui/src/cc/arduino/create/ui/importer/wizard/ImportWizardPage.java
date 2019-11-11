@@ -9,7 +9,7 @@
  */
 package cc.arduino.create.ui.importer.wizard;
 
-import static cc.arduino.create.ui.ImageDescriptorCache.ImageRef.ARDUINO;
+import static cc.arduino.create.ui.ImageDescriptorCache.ImageRef.IMPORT_WIZARD_BANNER;
 import static cc.arduino.create.ui.importer.wizard.ImportWizardModel.SourceType.DIR;
 import static cc.arduino.create.ui.importer.wizard.ImportWizardModel.SourceType.ZIP;
 import static org.eclipse.swt.SWT.BORDER;
@@ -82,7 +82,7 @@ public class ImportWizardPage extends WizardPage {
     private Button browseArchivesButton;
 
     protected ImportWizardPage(ImportWizardModel model) {
-        super("Import", "Import from Arduino Create", ARDUINO.asImageDescriptor());
+        super("Import", "Import from Arduino Create", IMPORT_WIZARD_BANNER.asImageDescriptor());
         setDescription(DESCRIPTION);
         this.model = model;
         setPageComplete(false);
