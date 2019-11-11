@@ -272,6 +272,7 @@ public class ImportWizardPage extends WizardPage {
         while (!valid) {
             candidateName = fileName + "_" + i;
             valid = !ResourcesPlugin.getWorkspace().getRoot().getProject(candidateName).exists();
+            i++;
         }
         return candidateName;
     }
@@ -372,32 +373,6 @@ public class ImportWizardPage extends WizardPage {
         }
     }
 
-    private void saveInHistory(IDialogSettings settings, String key, String value) {
-        String[] sourceNames = settings.getArray(key);
-        if (sourceNames == null) {
-            sourceNames = new String[0];
-        }
-        sourceNames = addToHistory(sourceNames, value);
-        settings.put(key, sourceNames);
-    }
-
-    private String[] addToHistory(String[] history, String newEntry) {
-        List<String> items = new ArrayList<>(Arrays.asList(history));
-        addToHistory(items, newEntry);
-        String[] r = new String[items.size()];
-        items.toArray(r);
-        return r;
-    }
-
-    private void addToHistory(List<String> history, String newEntry) {
-        history.remove(newEntry);
-        history.add(0, newEntry);
-
-        if (history.size() > COMBO_HISTORY_LENGTH) {
-            history.remove(COMBO_HISTORY_LENGTH);
-        }
-    }
-
     private SelectionListener onSelect(Consumer<SelectionEvent> consumer) {
         return widgetSelectedAdapter(consumer);
     }
@@ -423,6 +398,32 @@ public class ImportWizardPage extends WizardPage {
             return IMessageProvider.NONE;
         default:
             throw new IllegalArgumentException("Unhandled status severity: " + status.getSeverity() + "\n" + status);
+        }
+    }
+
+    /* default */ static void saveInHistory(IDialogSettings settings, String key, String value) {
+        String[] sourceNames = settings.getArray(key);
+        if (sourceNames == null) {
+            sourceNames = new String[0];
+        }
+        sourceNames = addToHistory(sourceNames, value);
+        settings.put(key, sourceNames);
+    }
+
+    /* default */ static String[] addToHistory(String[] history, String newEntry) {
+        List<String> items = new ArrayList<>(Arrays.asList(history));
+        addToHistory(items, newEntry);
+        String[] r = new String[items.size()];
+        items.toArray(r);
+        return r;
+    }
+
+    /* default */ static void addToHistory(List<String> history, String newEntry) {
+        history.remove(newEntry);
+        history.add(0, newEntry);
+
+        if (history.size() > COMBO_HISTORY_LENGTH) {
+            history.remove(COMBO_HISTORY_LENGTH);
         }
     }
 

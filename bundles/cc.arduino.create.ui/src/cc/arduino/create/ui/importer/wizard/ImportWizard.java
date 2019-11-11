@@ -11,10 +11,8 @@ package cc.arduino.create.ui.importer.wizard;
 
 import static org.eclipse.jface.dialogs.IMessageProvider.ERROR;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.DialogPage;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -33,31 +31,25 @@ public class ImportWizard extends Wizard implements IImportWizard {
     private final ImportWizardModel model;
     private final ImportWizardPage page;
 
+    private IDialogSettings wizardSettings;
+
     public ImportWizard() {
         this.model = new ImportWizardModel();
         setNeedsProgressMonitor(true);
         page = new ImportWizardPage(model);
 
         IDialogSettings workbenchSettings = UIActivator.getDefault().getDialogSettings();
-        IDialogSettings wizardSettings = workbenchSettings.getSection(DIALOG_SETTINGS_ID);
+        wizardSettings = workbenchSettings.getSection(DIALOG_SETTINGS_ID);
         if (wizardSettings == null) {
             wizardSettings = workbenchSettings.addNewSection(DIALOG_SETTINGS_ID);
         }
         setDialogSettings(wizardSettings);
+        model.restoreState(wizardSettings);
     }
 
     @Override
     public void init(IWorkbench workbench, IStructuredSelection selection) {
-        if (selection != null) {
-            Object firstElement = selection.getFirstElement();
-            if (firstElement instanceof File) {
-                model.initialPath = ((File) firstElement).getAbsolutePath();
-            } else if (firstElement instanceof IResource) {
-                model.initialPath = ((IResource) firstElement).getLocation().toFile().getAbsolutePath();
-            } else if (firstElement instanceof String && new File((String) firstElement).exists()) {
-                model.initialPath = new File((String) firstElement).getAbsolutePath();
-            }
-        }
+        // NOOP
     }
 
     @Override
@@ -69,7 +61,7 @@ public class ImportWizard extends Wizard implements IImportWizard {
     public boolean performFinish() {
         try {
             getContainer().run(true, false, monitor -> new ImportProjectOperation(model).run(monitor));
-            page.storeWidgetState();
+            storeState();
             return true;
         } catch (InvocationTargetException | InterruptedException e) {
             String message = e.getMessage();
@@ -84,6 +76,11 @@ public class ImportWizard extends Wizard implements IImportWizard {
             }
         }
         return false;
+    }
+
+    private void storeState() {
+        page.storeWidgetState();
+        model.storeState(wizardSettings);
     }
 
 }

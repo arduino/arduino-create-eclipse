@@ -60,6 +60,7 @@ public class ProjectStructureValidator {
             ValidatorVisitor visitor;
             if (isZip(normalized)) {
                 try (FileSystem fs = FileSystems.newFileSystem(normalized, null)) {
+                    // XXX: `_cmake`!!
                     Path root = fs.getRootDirectories().iterator().next().resolve("_cmake");
                     visitor = new ValidatorVisitor(root, subMonitor.newChild(3));
                     walkFileTree(root, visitor);
@@ -92,7 +93,7 @@ public class ProjectStructureValidator {
             // Validates the existence of the `CMakeLists.txt` file in the root.
             constraints.put(
                     path -> isPathAt("CMakeLists.txt", path) && isReadableFile(path),
-                    error("Invalid project structure. Couldn't find 'CMakeLists.txt' file."));
+                    error("Invalid project structure. Missing 'CMakeLists.txt' file."));
             // Validates the existence of the `sketch` folder and its content in the root.
             constraints.put(path -> {
                 if (isPathAt("sketch", path) && isReadableDirectory(path)) {
@@ -155,25 +156,14 @@ public class ProjectStructureValidator {
         }
 
         private boolean isPathAt(String expected, Path path) {
-            if (path == null || path.getFileName() == null) {
-                return false;
+            if (path.getFileName() == null) {
+                return "/".equals(expected.toString()); // Root of the zip filesystem.
             }
-            String actual = relativeFromRoot(resolveFromRoot(path.getFileName().toString())).toString();
-            if (actual.startsWith("/")) {
-                actual = actual.substring(1);
-            }
+            String actual = root.relativize(root.resolve(path.getFileName())).toString();
             if (actual.endsWith("/")) {
                 actual = actual.substring(0, actual.length() - 1);
             }
             return expected.equals(actual);
-        }
-
-        private Path relativeFromRoot(Path path) {
-            return root.relativize(path);
-        }
-
-        private Path resolveFromRoot(String path) {
-            return root.resolve(path);
         }
 
     }
