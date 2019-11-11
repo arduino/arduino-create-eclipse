@@ -14,7 +14,6 @@ import static org.eclipse.core.runtime.IStatus.OK;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,8 +23,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-
-import cc.arduino.create.core.utils.ZipUtils;
 
 @RunWith(Parameterized.class)
 public class ProjectStructureValidatorTest {
@@ -44,13 +41,12 @@ public class ProjectStructureValidatorTest {
                 { path("noSketchFile"), ERROR },
                 { path("noCMakeLists"), ERROR },
                 { path("valid"), OK },
-                { path("arduino_create-cmake.zip"), OK },
-                { zip("empty"), ERROR },
-                { zip("noCoreFolder"), ERROR },
-                { zip("noSketchFolder"), ERROR },
-                { zip("noSketchFile"), ERROR },
-                { zip("noCMakeLists"), ERROR },
-                { zip("valid"), OK }
+                { path("empty.zip"), ERROR },
+                { path("noCoreFolder.zip"), ERROR },
+                { path("noSketchFolder.zip"), ERROR },
+                { path("noSketchFile.zip"), ERROR },
+                { path("noCMakeLists.zip"), ERROR },
+                { path("valid.zip"), OK }
         });
     }
 
@@ -67,16 +63,6 @@ public class ProjectStructureValidatorTest {
 
     private static Path path(String other) {
         return new File("").getAbsoluteFile().toPath().resolve("resources").resolve(other);
-    }
-
-    private static Path zip(String other) {
-        try {
-            Path target = Files.createTempFile(other, ".zip");
-            Path source = path(other);
-            return ZipUtils.zip(source, target);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

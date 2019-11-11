@@ -60,7 +60,7 @@ public class ProjectStructureValidator {
             ValidatorVisitor visitor;
             if (isZip(normalized)) {
                 try (FileSystem fs = FileSystems.newFileSystem(normalized, null)) {
-                    Path root = fs.getRootDirectories().iterator().next();
+                    Path root = fs.getRootDirectories().iterator().next().resolve("_cmake");
                     visitor = new ValidatorVisitor(root, subMonitor.newChild(3));
                     walkFileTree(root, visitor);
                 }
