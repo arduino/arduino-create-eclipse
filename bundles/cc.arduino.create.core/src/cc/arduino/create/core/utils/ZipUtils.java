@@ -16,9 +16,10 @@ import static java.nio.file.Files.exists;
 import static java.nio.file.Files.isDirectory;
 import static java.nio.file.Files.newOutputStream;
 import static java.nio.file.Files.notExists;
-import static java.nio.file.Files.walk;
 import static java.nio.file.Files.walkFileTree;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.DirectoryNotEmptyException;
@@ -30,11 +31,12 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.eclipse.core.runtime.Assert;
+
+import com.google.common.base.Strings;
 
 public final class ZipUtils {
 
@@ -107,24 +109,40 @@ public final class ZipUtils {
         Assert.isLegal(exists(source), source + " does not exist");
         Assert.isLegal(exists(target), target + " does not exist");
 
-        try (ZipOutputStream zos = new ZipOutputStream(newOutputStream(target)); Stream<Path> paths = walk(source)) {
-            paths.filter(path -> !isDirectory(path)).forEach(path -> addToZip(path, source, zos));
+        try (ZipOutputStream zos = new ZipOutputStream(newOutputStream(target))) {
+            addDirToZipArchive(zos, source.toFile(), null);
         } catch (Exception e) {
             throw new RuntimeException("Error when zipping " + source + " to " + target, e);
         }
         return target;
     }
 
-    private static void addToZip(Path enrtyPath, Path source, ZipOutputStream zos) {
-        {
-            ZipEntry zipEntry = new ZipEntry(source.relativize(enrtyPath).toString());
-            try {
-                zos.putNextEntry(zipEntry);
-                copy(enrtyPath, zos);
-                zos.closeEntry();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+    public static void addDirToZipArchive(ZipOutputStream zos, File toZip,
+            /* nullable */String parentDirName) throws Exception {
+
+        if (toZip == null || !toZip.exists()) {
+            return;
+        }
+
+        String zipEntryName = toZip.getName();
+        if (Strings.isNullOrEmpty(parentDirName)) {
+            zipEntryName = parentDirName + "/" + toZip.getName();
+        }
+
+        if (toZip.isDirectory()) {
+            for (File file : toZip.listFiles()) {
+                addDirToZipArchive(zos, file, zipEntryName);
             }
+        } else {
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = new FileInputStream(toZip);
+            zos.putNextEntry(new ZipEntry(zipEntryName));
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                zos.write(buffer, 0, length);
+            }
+            zos.closeEntry();
+            fis.close();
         }
     }
 

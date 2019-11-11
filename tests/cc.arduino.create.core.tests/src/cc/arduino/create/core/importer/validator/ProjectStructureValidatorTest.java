@@ -50,7 +50,7 @@ public class ProjectStructureValidatorTest {
                 { zip("noSketchFolder"), ERROR },
                 { zip("noSketchFile"), ERROR },
                 { zip("noCMakeLists"), ERROR },
-                // { zip("valid"), OK }
+                { zip("valid"), OK }
         });
     }
 
