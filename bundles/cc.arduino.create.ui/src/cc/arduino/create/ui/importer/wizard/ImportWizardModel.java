@@ -11,6 +11,7 @@ package cc.arduino.create.ui.importer.wizard;
 
 import static cc.arduino.create.ui.UIActivator.error;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -18,6 +19,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jface.dialogs.IDialogSettings;
 
 import com.google.common.base.Strings;
 
@@ -29,9 +31,7 @@ public class ImportWizardModel {
         DIR, ZIP
     }
 
-    public static String TYPE = "type";
-    public static String DIR_PATH = "dirPath";
-    public static String ZIP_PATH = "zipPath";
+    private static String STORE_SOURCE_PATH = ImportWizardModel.class.getName() + ".STORE_PATH";
 
     public SourceType type = SourceType.DIR;
     public String initialPath; // UI/UX: Sugar for getting an initial path from a structured selection.
@@ -54,6 +54,25 @@ public class ImportWizardModel {
             return error("The '" + projectName + "' already exists.");
         }
         return new ProjectStructureValidator().validate(getPath(), monitor);
+    }
+
+    public void storeState(IDialogSettings settings) {
+        Path path = getPath();
+        if (settings != null && path != null) {
+            settings.put(STORE_SOURCE_PATH, path.toString());
+        }
+    }
+
+    public void restoreState(IDialogSettings settings) {
+        if (settings != null) {
+            String pathValue = settings.get(STORE_SOURCE_PATH);
+            if (!Strings.isNullOrEmpty(pathValue)) {
+                Path path = Paths.get(pathValue);
+                if (Files.exists(path)) {
+                    initialPath = path.toString();
+                }
+            }
+        }
     }
 
 }

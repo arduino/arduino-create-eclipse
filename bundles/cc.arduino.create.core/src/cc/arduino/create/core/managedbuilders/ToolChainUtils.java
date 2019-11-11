@@ -1,3 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2007, 2010 Intel Corporation and others.
+ *
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 2.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Contributors:
+ * Intel Corporation - Initial API and implementation
+ *******************************************************************************/
+// Based on https://github.com/eclipse-cdt/cdt/blob/170e654b4796bad1453ae85a427b97317d67a69a/build/org.eclipse.cdt.managedbuilder.ui/src/org/eclipse/cdt/managedbuilder/ui/wizards/AbstractCWizard.java
 /**
  * Copyright (C) 2019 TypeFox and others.
  *
@@ -27,6 +41,8 @@ public final class ToolChainUtils {
         /**
          * Default options for C/C++.
          */
+        // https://github.com/eclipse-cdt/cdt/blob/170e654b4796bad1453ae85a427b97317d67a69a/core/org.eclipse.cdt.core/plugin.xml#L520-L529
+        // https://github.com/eclipse-cdt/cdt/blob/170e654b4796bad1453ae85a427b97317d67a69a/build/org.eclipse.cdt.managedbuilder.gnu.ui/plugin.xml#L1695-L1703
         Options DEFAULT = new Options() {
 
             @Override
