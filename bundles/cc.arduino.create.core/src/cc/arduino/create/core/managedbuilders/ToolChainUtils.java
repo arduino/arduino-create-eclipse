@@ -13,7 +13,7 @@
  *******************************************************************************/
 // Based on https://github.com/eclipse-cdt/cdt/blob/170e654b4796bad1453ae85a427b97317d67a69a/build/org.eclipse.cdt.managedbuilder.ui/src/org/eclipse/cdt/managedbuilder/ui/wizards/AbstractCWizard.java
 /**
- * Copyright (C) 2019 TypeFox and others.
+ * Copyright (C) 2019 Arduino SA and others.
  *
  * This program and the accompanying materials are made available under
  * the terms of the Eclipse Public License v. 2.0 which is available at
