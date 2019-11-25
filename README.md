@@ -30,7 +30,6 @@ The p2 update sites are available for each released version on GitHub as a ZIP a
    ```
 
 ### Arduino Create:
-
 The following Arduino Create export structures are supported:
  - Folder:
    ```
@@ -58,6 +57,23 @@ The following Arduino Create export structures are supported:
      |____ sketch
      |  |___ sketch-file.ino.cpp
      |____ CMakeLists.txt
+   ```
+
+### Limitations:
+Currently, you can build the imported Arduino Create project on Linux only.
+ - Windows:
+   ```
+   C:\path\to\your\project\_cmake\core\shell.h:8:10: fatal error: sys/wait.h: No such file or directory
+    #include <sys/wait.h>
+             ^~~~~~~~~~~~
+   compilation terminated.
+   ```
+ - macOS:
+   ```
+   /path/to/your/project/_cmake/core/DebugSerial.h:56:2: error: unknown type name 'pthread_barrier_t'
+       pthread_barrier_t _barrier;
+       ^
+   1 error generated.
    ```
 
 ### License:
