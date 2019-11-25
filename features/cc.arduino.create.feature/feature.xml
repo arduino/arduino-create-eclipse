@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="cc.arduino.create.feature"
-      label="Arduino Create Feature"
+      label="Arduino Create"
       version="0.0.1.qualifier"
       provider-name="Arduino">
 
