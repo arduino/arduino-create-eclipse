@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Arduino Create Core
 Bundle-SymbolicName: cc.arduino.create.core
 Bundle-Version: 0.0.1.qualifier
-Bundle-Vendor: Arduino
+Bundle-Vendor: Arduino SA
 Automatic-Module-Name: cc.arduino.create.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: com.google.guava;visibility:=reexport,

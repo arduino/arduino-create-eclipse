@@ -56,4 +56,3 @@ jobs:
       assetUploadMode: delete
       addChangeLog: true
     displayName: Release
-
