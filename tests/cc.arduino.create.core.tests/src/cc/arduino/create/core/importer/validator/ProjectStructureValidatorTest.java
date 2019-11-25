@@ -34,7 +34,6 @@ public class ProjectStructureValidatorTest {
         return Arrays.asList(new Object[][] {
                 { null, ERROR },
                 { path("missing"), ERROR },
-                { path("noReadAccess"), ERROR }, // `sudo chmod -R 333 ./noReadAccess/`
                 { path("empty"), ERROR },
                 { path("noCoreFolder"), ERROR },
                 { path("noSketchFolder"), ERROR },
