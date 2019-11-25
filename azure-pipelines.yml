@@ -43,7 +43,7 @@ jobs:
     inputs:
       artifactName: repository
       downloadPath: $(System.ArtifactsDirectory)/repository
-  - bash: zip -r -j -9 $(System.ArtifactsDirectory)/repository/arduino-eclipse-p2.zip $(System.ArtifactsDirectory)/repository/
+  - bash: cd $(System.ArtifactsDirectory)/repository/ && zip -r -9 arduino-eclipse-p2.zip *
   - task: GithubRelease@0
     inputs:
       gitHubConnection: typefox-service-account1
