@@ -15,7 +15,6 @@
     <modules>
         <module>cc.arduino.create.p2</module>
         <module>cc.arduino.create.target</module>
-        <!-- <module>cc.arduino.create.product</module> -->
     </modules>
 
 </project>
