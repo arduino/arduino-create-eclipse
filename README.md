@@ -29,6 +29,37 @@ The p2 update sites are available for each released version on GitHub as a ZIP a
    jar:https://github.com/TypeFox/arduino-eclipse/releases/download/v0.0.1/arduino-eclipse-p2.zip!/
    ```
 
+### Arduino Create:
+
+The following Arduino Create export structures are supported:
+ - Folder:
+   ```
+   _cmake
+   |____ build (empty)
+   |____ core
+   |  |____ Arduino.h
+   |  |____ (other core .h and .cpp files)
+   |____ lib
+   |  |____ (3rd party libraries if any)
+   |____ sketch
+   |  |___ sketch-file.ino.cpp
+   |____ CMakeLists.txt   
+   ```
+ - ZIP:
+   ```
+   arduino_create-cmake.zip
+   |____ _cmake
+     |____ build (empty)
+     |____ core
+     |  |____ Arduino.h
+     |  |____ (other core .h and .cpp files)
+     |____ lib
+     |  |____ (3rd party libraries if any)
+     |____ sketch
+     |  |___ sketch-file.ino.cpp
+     |____ CMakeLists.txt
+   ```
+
 ### License:
 
  - This plug-in is licensed under the [`EPL-2.0`](https://www.eclipse.org/legal/epl-2.0/).
