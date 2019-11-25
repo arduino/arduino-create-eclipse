@@ -42,8 +42,8 @@ jobs:
     displayName: Download
     inputs:
       artifactName: repository
-      downloadPath: repository
-  - bash: zip -r -j -9 ./repository/p2-$(Release.Tag).zip /repository/
+      downloadPath: $(System.ArtifactsDirectory)/repository
+  - bash: zip -r -j -9 $(System.ArtifactsDirectory)/repository/p2-$(Release.Tag).zip $(System.ArtifactsDirectory)/repository/
   - task: GithubRelease@0
     inputs:
       gitHubConnection: typefox-service-account1
