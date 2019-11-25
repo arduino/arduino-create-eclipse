@@ -12,12 +12,14 @@ package cc.arduino.create.core.importer.validator;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 import static org.eclipse.core.runtime.IStatus.OK;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.eclipse.core.runtime.IStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -45,6 +47,7 @@ public class ProjectStructureValidatorTest {
                 { path("noSketchFolder.zip"), ERROR },
                 { path("noSketchFile.zip"), ERROR },
                 { path("noCMakeLists.zip"), ERROR },
+                { path("no_cmake.zip"), "'_cmake' is missing from the root of the archive." },
                 { path("valid.zip"), OK }
         });
     }
@@ -52,12 +55,24 @@ public class ProjectStructureValidatorTest {
     @Parameter(0)
     public Path path;
 
+    /**
+     * The expected {@link IStatus#getSeverity() severity} as an {@code Integer}, or the {@link IStatus#getMessage()
+     * message} of the validation error.
+     */
     @Parameter(1)
-    public int expected;
+    public Object expected;
 
     @Test
     public void test() {
-        assertEquals(expected, validator.validate(path, null).getSeverity());
+        IStatus status = validator.validate(path, null);
+        if (expected instanceof Integer) {
+            assertEquals(expected, status.getSeverity());
+        } else if (expected instanceof String) {
+            assertEquals("Expected an ERROR when the validation message is defined.", ERROR, status.getSeverity());
+            assertTrue(status.getMessage().contains(String.valueOf(expected)));
+        } else {
+            throw new UnsupportedOperationException("Implementation error. Unexpected test expecation.");
+        }
     }
 
     private static Path path(String other) {

@@ -62,6 +62,10 @@ public class ProjectStructureValidator {
                 try (FileSystem fs = FileSystems.newFileSystem(normalized, null)) {
                     // XXX: `_cmake`!!
                     Path root = fs.getRootDirectories().iterator().next().resolve("_cmake");
+                    if (!exists(root)) {
+                        throw new IOException(
+                                "Invalid project structure. '_cmake' is missing from the root of the archive.");
+                    }
                     visitor = new ValidatorVisitor(root, subMonitor.newChild(3));
                     walkFileTree(root, visitor);
                 }
