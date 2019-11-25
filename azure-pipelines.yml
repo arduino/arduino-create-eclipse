@@ -17,6 +17,7 @@ jobs:
         imageName: 'macos-10.13'
       windows:
         imageName: 'vs2017-win2016'
+    maxParallel: 3
   pool:
     vmImage: $(imageName)
   workspace:
