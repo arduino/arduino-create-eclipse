@@ -28,7 +28,7 @@ jobs:
     inputs:
       pathtoPublish: releng/cc.arduino.create.p2/target/repository/
       artifactName: repository
-    condition: and(succeeded(), and(in(variables['Agent.OS'], 'Linux'), startsWith(variables['Release.Tag'], 'v'))
+    condition: and(succeeded(), and(in(variables['Agent.OS'], 'Linux'), startsWith(variables['Release.Tag'], 'v')))
     displayName: Publish
 
 - job: Release
