@@ -53,7 +53,7 @@ jobs:
       repositoryName: TypeFox/arduino-eclipse
       assets: $(System.DefaultWorkingDirectory)/repository/*.zip
       target: $(Build.SourceVersion)
-      action: create
+      action: edit
       tagSource: auto
       tag: $(Release.Tag)
       assetUploadMode: delete
