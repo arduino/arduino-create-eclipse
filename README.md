@@ -13,6 +13,10 @@ Eclipse Plug-in for importing projects into Eclipse CDT exported by [Arduino Cre
 ./mnvw clean verify
 ```
 
+### Install:
+The easiest way to install, is to drag and drop the `Install` button into your running Eclipse workspace. This plug-in is also [available at Eclipse Marketplace](https://marketplace.eclipse.org/content/arduino-create-eclipse-plug).
+
+[![Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png)](http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=4895924 "Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client")
 
 ### p2:
 The p2 update sites are available for each released version on GitHub as a ZIP archive. The `latest` p2 is available [here](https://github.com/TypeFox/arduino-eclipse/releases/latest/download/arduino-eclipse-p2.zip). If you want to use the p2 update URL inside Eclipse, you **must** prefix the URL with `jar:` and suffix it with `!/`.
