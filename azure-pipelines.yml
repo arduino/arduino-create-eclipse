@@ -46,11 +46,11 @@ jobs:
     inputs:
       artifactName: repository
       downloadPath: $(System.DefaultWorkingDirectory)
-  - bash: cd repository && zip -r -D -9 arduino-eclipse-p2.zip *
+  - bash: cd repository && zip -r -D -9 arduino-create-eclipse-p2.zip *
   - task: GithubRelease@0
     inputs:
       gitHubConnection: typefox-service-account1
-      repositoryName: TypeFox/arduino-eclipse
+      repositoryName: arduino/arduino-create-eclipse
       assets: $(System.DefaultWorkingDirectory)/repository/*.zip
       target: $(Build.SourceVersion)
       action: edit

@@ -1,5 +1,5 @@
-# arduino-eclipse
-[![Build Status](https://dev.azure.com/typefox/Arduino/_apis/build/status/TypeFox.arduino-eclipse?branchName=master)](https://dev.azure.com/typefox/Arduino/_build/latest?definitionId=6&branchName=master)
+# arduino-create-eclipse
+[![Build Status](https://dev.azure.com/typefox/Arduino/_apis/build/status/arduino.arduino-create-eclipse?branchName=master)](https://dev.azure.com/typefox/Arduino/_build/latest?definitionId=7&branchName=master)
 
 Eclipse Plug-in for importing projects into Eclipse CDT exported by [Arduino Create](https://create.arduino.cc).
 
@@ -9,9 +9,18 @@ Eclipse Plug-in for importing projects into Eclipse CDT exported by [Arduino Cre
  - [`make`](https://www.gnu.org/software/make/), and [`cmake`](https://cmake.org/download/) on the `PATH`.
 
 ### Build:
+Command line:
 ```
 ./mnvw clean verify
 ```
+
+Eclipse:
+ - Clone the [`arduino-create-eclipse`](https://github.com/arduino/arduino-create-eclipse.git) repository and
+ - Import the sources into your Eclipse workspace with
+   - `Import...` > `General` > `Existing Projects into Workspace`.
+   - `Select root directory` and browse the root of the cloned repository.
+   - Enable `Search for nested projects`, and
+   - Hit `Finish` ✨
 
 ### Install:
 The easiest way to install, is to drag and drop the `Install` button into your running Eclipse workspace. This plug-in is also [available at Eclipse Marketplace](https://marketplace.eclipse.org/content/arduino-create-eclipse-plug).
@@ -19,18 +28,18 @@ The easiest way to install, is to drag and drop the `Install` button into your r
 [![Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png)](http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=4895924 "Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client")
 
 ### p2:
-The p2 update sites are available for each released version on GitHub as a ZIP archive. The `latest` p2 is available [here](https://github.com/TypeFox/arduino-eclipse/releases/latest/download/arduino-eclipse-p2.zip). If you want to use the p2 update URL inside Eclipse, you **must** prefix the URL with `jar:` and suffix it with `!/`.
+The p2 update sites are available for each released version on GitHub as a ZIP archive. The `latest` p2 is available [here](https://github.com/arduino/arduino-create-eclipse/releases/latest/download/arduino-create-eclipse-p2.zip). If you want to use the p2 update URL inside Eclipse, you **must** prefix the URL with `jar:` and suffix it with `!/`.
  - URL of the `latest` p2:
    ```
-   jar:https://github.com/TypeFox/arduino-eclipse/releases/latest/download/arduino-eclipse-p2.zip!/
+   jar:https://github.com/arduino/arduino-create-eclipse/releases/latest/download/arduino-create-eclipse-p2.zip!/
    ```
  - Generic p2 URL pattern for any [`semver`](https://semver.org/) releases:
    ```
-   jar:https://github.com/TypeFox/arduino-eclipse/releases/download/v${semver}/arduino-eclipse-p2.zip!/
+   jar:https://github.com/arduino/arduino-create-eclipse/releases/download/v${semver}/arduino-create-eclipse-p2.zip!/
    ```
  - Example URL for version `0.0.1`:
    ```
-   jar:https://github.com/TypeFox/arduino-eclipse/releases/download/v0.0.1/arduino-eclipse-p2.zip!/
+   jar:https://github.com/arduino/arduino-create-eclipse/releases/download/v0.0.1/arduino-create-eclipse-p2.zip!/
    ```
 
 ### Arduino Create:
@@ -79,6 +88,22 @@ Currently, you can build the imported Arduino Create project on Linux only.
        ^
    1 error generated.
    ```
+
+### FAQ:
+ Q: What happens when `cmake` is not installed on the system?\
+ A: If `cmake` is not installed, you will see the following console output in Eclipse:
+
+```
+Buildfile generation error occurred..
+cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON -G “Unix Makefiles” /home/user_name/dev/arduino-create-eclipse-ws/arduino_create-cmake
+Cannot run program “cmake”: Unknown reason
+Error: Program “cmake” not found in PATH
+PATH=[/home/user_name/bin:/home/user_name/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin]
+Build stopped..
+```
+
+ Q: What happens when `cmake4eclipse` is not installed in Eclipse?\
+ A: This Eclipse plug-in has a hard dependency on `cmake4eclipse`. It will be implicitly installed into Eclipse when this Eclipse plug-in is installed either from a p2 update site or the Eclipse Marketplace.
 
 ### License:
 
