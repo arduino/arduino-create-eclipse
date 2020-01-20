@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Arduino Create UI
 Bundle-SymbolicName: cc.arduino.create.ui;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.0.2.qualifier
 Bundle-Activator: cc.arduino.create.ui.UIActivator
 Bundle-Vendor: Arduino SA
 Require-Bundle: cc.arduino.create.core,

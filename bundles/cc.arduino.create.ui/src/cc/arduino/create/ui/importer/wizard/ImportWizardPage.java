@@ -205,7 +205,7 @@ public class ImportWizardPage extends WizardPage {
         group.setLayoutData(new GridData(FILL_HORIZONTAL));
 
         Button buildAfterImportButton = new Button(group, CHECK);
-        buildAfterImportButton.setText("Automatically start the buld after import");
+        buildAfterImportButton.setText("Automatically start the build after import");
         buildAfterImportButton.setSelection(model.buildAfterImport);
         buildAfterImportButton.addSelectionListener(onSelect(e -> {
             model.buildAfterImport = buildAfterImportButton.getSelection();

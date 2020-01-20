@@ -2,10 +2,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cc.arduino.create</groupId>
     <artifactId>cc.arduino.create.configuration</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
-        <tycho.version>1.4.0</tycho.version>
+        <tycho.version>1.5.1</tycho.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Skip the deployment here, submodules can override this property -->
         <!--maven.deploy.skip>true</maven.deploy.skip-->
@@ -56,7 +56,7 @@
                         <artifact>
                             <groupId>cc.arduino.create</groupId>
                             <artifactId>cc.arduino.create.target</artifactId>
-                            <version>0.0.1-SNAPSHOT</version>
+                            <version>0.0.2-SNAPSHOT</version>
                         </artifact>
                     </target>
                     <environments>
