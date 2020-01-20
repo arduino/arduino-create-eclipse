@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/cc.arduino.create.feature_0.0.1.qualifier.jar" id="cc.arduino.create.feature" version="0.0.1.qualifier">
+   <feature url="features/cc.arduino.create.feature_0.0.2.qualifier.jar" id="cc.arduino.create.feature" version="0.0.2.qualifier">
       <category name="cc.arduino.create"/>
    </feature>
    <category-def name="cc.arduino.create" label="Arduino Create Eclipse Plug-in">
