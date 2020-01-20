@@ -71,7 +71,7 @@ public class ProjectStructureValidatorTest {
             assertEquals("Expected an ERROR when the validation message is defined.", ERROR, status.getSeverity());
             assertTrue(status.getMessage().contains(String.valueOf(expected)));
         } else {
-            throw new UnsupportedOperationException("Implementation error. Unexpected test expecation.");
+            throw new UnsupportedOperationException("Implementation error. Unexpected test expectation.");
         }
     }
 

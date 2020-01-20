@@ -138,7 +138,7 @@ public class ImportProjectOperation extends WorkspaceModifyOperation {
             subMonitor.subTask("Initializing default C++ configuration...");
             createDefaultCProjectDescription(project, subMonitor.newChild(1));
 
-            subMonitor.subTask("Registring CDT project...");
+            subMonitor.subTask("Registering CDT project...");
             CCorePlugin.getDefault().createCDTProject(project.getDescription(), project, subMonitor.newChild(1));
             subMonitor.subTask("Adding C nature...");
             CProjectNature.addCNature(project, subMonitor.newChild(1));
@@ -155,7 +155,7 @@ public class ImportProjectOperation extends WorkspaceModifyOperation {
             // 4.
             ICProjectDescription description = CoreModel.getDefault().getProjectDescription(project);
             if (description == null) {
-                throw new CoreException(error("Could not retrieve project descrition for '" + project + "'."));
+                throw new CoreException(error("Could not retrieve project description for '" + project + "'."));
             }
             ICConfigurationDescription[] configurationDescriptions = description.getConfigurations();
             if (configurationDescriptions == null || configurationDescriptions.length == 0) {
@@ -208,7 +208,7 @@ public class ImportProjectOperation extends WorkspaceModifyOperation {
                     ((IConfigurationModification) createModification).setBuilder(findFirst.get());
                 } else {
                     throw new CoreException(
-                            error("Could not find builder '" + CMAKE_BUILDER_PORTABLE_ID + "' on classpath."));
+                            error("Could not find builder '" + CMAKE_BUILDER_PORTABLE_ID + "' on the classpath."));
                 }
                 createModification.apply();
                 toolChainManager.createModification(configuration, createModification).apply();
